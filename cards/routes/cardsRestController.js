@@ -9,10 +9,16 @@ const {
     likeCard,
     changeBizNumber,
 } = require("../models/cardsAccessDataService");
+const auth = require("../../auth/authService");
 const router = express.Router();
 
-router.post("/", async (req, res) => {
+router.post("/", auth, async (req, res) => {
+
     try {
+        const userInfo = req.user;
+        if (!userInfo.isBusiness) {
+            return res.status(403).send("Only business user can create new card");
+        }
         let card = await createCard(req.body);
         res.send(card);
     } catch (error) {
@@ -29,7 +35,7 @@ router.get("/", async (req, res) => {
     }
 });
 
-router.get("/my-cards", async (req, res) => {
+router.get("/my-cards", auth, async (req, res) => {
     try {
         const { id } = req.body;
         let card = await getMyCards(id);
@@ -49,7 +55,7 @@ router.get("/:id", async (req, res) => {
     }
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", auth, async (req, res) => {
     try {
         const { id } = req.params;
         const newCard = req.body;
@@ -60,7 +66,7 @@ router.put("/:id", async (req, res) => {
     }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", auth, async (req, res) => {
     try {
         const { id } = req.params;
         let card = await deleteCard(id);
@@ -70,7 +76,7 @@ router.delete("/:id", async (req, res) => {
     }
 });
 
-router.patch("/:id", async (req, res) => {
+router.patch("/:id", auth, async (req, res) => {
     try {
         const { id } = req.params;
         const { userId } = req.body;
@@ -81,7 +87,7 @@ router.patch("/:id", async (req, res) => {
     }
 });
 
-router.patch("/biz-number/:id", async (req, res) => {
+router.patch("/biz-number/:id", auth, async (req, res) => {
     try {
         const { id } = req.params;
         const { bizNumber } = req.body;

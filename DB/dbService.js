@@ -4,11 +4,14 @@ const connectToAtlaslDb = require("./mongodb/connectToAtlas");
 const ENVIRONMENT = "development";
 
 const connectToDb = async () => {
-    if (ENVIRONMENT === "development") {
-        await connectToLocalDb();
-    }
-    if (ENVIRONMENT === "production") {
-        await connectToAtlaslDb();
+    try {
+        if (ENVIRONMENT === "development") {
+            await connectToLocalDb();
+        } else if (ENVIRONMENT === "production") {
+            await connectToAtlaslDb();
+        }
+    } catch (error) {
+        console.error('Database connection error:', error);
     }
 };
 

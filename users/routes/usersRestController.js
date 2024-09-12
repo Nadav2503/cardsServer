@@ -13,6 +13,16 @@ router.post("/users", async (req, res) => {
     }
 });
 
+router.post("/login", async (req, res) => {
+    try {
+        let { email, password } = req.body;
+        const token = await loginUser(email, password);
+        res.send(token);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+});
+
 router.get("/users/:id", async (req, res) => {
     try {
         const { id } = req.params;
