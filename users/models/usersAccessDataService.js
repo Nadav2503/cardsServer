@@ -1,3 +1,4 @@
+const _ = require("lodash");
 const { generateAuthToken } = require("../../auth/providers/jwt");
 const User = require("./mongodb/User");
 
@@ -5,6 +6,7 @@ const registerUser = async (newUser) => {
     try {
         let user = new User(newUser);
         user = await user.save();
+        user = _.pick(user, ['_id', 'email', 'name']);
         return user;
     } catch (error) {
         throw new Error("Mongoose " + error.message);
