@@ -1,7 +1,9 @@
 const express = require("express");
+const chalk = require("chalk");
 const connectToDb = require("./DB/dbService");
 const router = require("./router/router");
 const corsMiddleWares = require("./middlewares/cors");
+const { handleError } = require("./utils/handleErrors");
 const app = express();
 const PORT = 8181;
 
@@ -16,13 +18,13 @@ app.use((req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
-    console.log(err);
-    res.status(500).send("internal error of the server");
+    const message = err || "internal error of the server"
+    return handleError(res, 500, message);
 });
 
 app.use(router);
 
 app.listen(PORT, () => {
-    console.log("app is listening to port " + PORT);
+    console.log(chalk.yellow("app is listening to port" + PORT));
     connectToDb();
 });

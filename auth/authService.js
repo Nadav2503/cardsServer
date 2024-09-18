@@ -1,3 +1,4 @@
+const { createError, handleError } = require("../utils/handleErrors");
 const { verifyToken } = require("./providers/jwt");
 
 const tokenGenerator = "jwt";
@@ -7,19 +8,23 @@ const auth = (req, res, next) => {
         try {
             const tokenFromClient = req.header("x-auth-token");
             if (!tokenFromClient) {
-                throw new Error("Authentication Error: Please Login");
+                const error = new Error("Please Login");
+                error.status = 401;
+                return createError("Authentication", error)
             }
             const userInfo = verifyToken(tokenFromClient);
             if (!userInfo) {
-                throw new Error("Authentication Error: Unauthorize user");
+                const error = new Error("Unauthorize user");
+                error.status = 401;
+                return createError("Authentication", error)
             }
             req.user = userInfo;
             return next();
         } catch (error) {
-            return res.status(401).send(error.message);
+            return handleError(res, 401, error.message);
         }
     }
-    return res.status(500).send("you did not used valid token generator");
+    return handleError(res, 500, "you did not used valid token generator");
 };
 
 module.exports = auth;
