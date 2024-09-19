@@ -1,4 +1,5 @@
-const DB = "MONGODB";
+const config = require("config");
+const DB = config.get("DB");
 const _ = require("lodash");
 const { generateAuthToken } = require("../../auth/providers/jwt");
 const User = require("./mongodb/User");
@@ -6,7 +7,7 @@ const { createError } = require("../../utils/handleErrors");
 const { comparePasswords, generatUserPassword } = require("../helpers/bcrypt");
 
 const registerUser = async (newUser) => {
-    if (DB == "MONGODB") {
+    if (DB == "mongodb") {
         try {
             newUser.password = generatUserPassword(newUser.password);
             let user = new User(newUser);
@@ -23,7 +24,7 @@ const registerUser = async (newUser) => {
 };
 
 const getUser = async (userId) => {
-    if (DB == "MONGODB") {
+    if (DB == "mongodb") {
         try {
             let user = await User.findById(userId);
             return user;
@@ -37,7 +38,7 @@ const getUser = async (userId) => {
 };
 
 const getUsers = async () => {
-    if (DB == "MONGODB") {
+    if (DB == "mongodb") {
         try {
             let users = await User.find();
             return users;
@@ -51,7 +52,7 @@ const getUsers = async () => {
 };
 
 const loginUser = async (email, password) => {
-    if (DB == "MONGODB") {
+    if (DB == "mongodb") {
         try {
             const userFromDb = await User.findOne({ email });
             if (!userFromDb) {

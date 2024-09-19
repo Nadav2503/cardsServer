@@ -1,5 +1,6 @@
 const registerValidation = require("./joi/registerValidation");
 const loginValidation = require("./joi/loginValidation");
+
 const config = require("config");
 const validator = config.get("VALIDATOR");
 

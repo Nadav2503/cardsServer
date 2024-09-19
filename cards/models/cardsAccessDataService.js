@@ -1,9 +1,11 @@
-const DB = "MONGODB";
 const { createError } = require("../../utils/handleErrors");
 const Card = require("./mongodb/Card");
 
+const config = require("config");
+const DB = config.get("DB");
+
 const createCard = async (newCard) => {
-    if (DB == "MONGODB") {
+    if (DB == "mongodb") {
         try {
             let card = new Card(newCard);
             card = await card.save();
@@ -18,7 +20,7 @@ const createCard = async (newCard) => {
 };
 
 const getCards = async () => {
-    if (DB == "MONGODB") {
+    if (DB == "mongodb") {
         try {
             let cards = await Card.find();
             return cards;
@@ -32,7 +34,7 @@ const getCards = async () => {
 };
 
 const getCard = async (cardId) => {
-    if (DB == "MONGODB") {
+    if (DB == "mongodb") {
         try {
             let card = await Card.findById(cardId);
             return card;
@@ -46,7 +48,7 @@ const getCard = async (cardId) => {
 };
 
 const getMyCards = async (userId) => {
-    if (DB == "MONGODB") {
+    if (DB == "mongodb") {
         try {
             let cards = await Card.find({ user_id: userId });
             return cards;
@@ -60,7 +62,7 @@ const getMyCards = async (userId) => {
 };
 
 const updateCard = async (cardId, newCard) => {
-    if (DB == "MONGODB") {
+    if (DB == "mongodb") {
         try {
             let card = await Card.findByIdAndUpdate(cardId, newCard, { new: true });
             return card;
@@ -74,7 +76,7 @@ const updateCard = async (cardId, newCard) => {
 };
 
 const deleteCard = async (cardId) => {
-    if (DB == "MONGODB") {
+    if (DB == "mongodb") {
         try {
             let card = await Card.findByIdAndDelete(cardId);
             return card;
@@ -88,7 +90,7 @@ const deleteCard = async (cardId) => {
 };
 
 const changeBizNumber = async (cardId, newBizNumber) => {
-    if (DB == "MONGODB") {
+    if (DB == "mongodb") {
         try {
             let card = await Card.findAndUpdate({ _id: cardId }, { bizNumber: newBizNumber });
             return card;
@@ -102,7 +104,7 @@ const changeBizNumber = async (cardId, newBizNumber) => {
 };
 
 const likeCard = async (cardId, userId) => {
-    if (DB == "MONGODB") {
+    if (DB == "mongodb") {
         try {
             let card = await Card.findById(cardId);
             if (!card) {
