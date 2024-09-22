@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const connectionStringForAtlas = "";
 
-const connectToAtlaslDb = async () => {
+const connectToAtlasDb = async () => {
     try {
         //await mongoose.connect(connectionStringForAtlas);
         console.log("Connected to MongoDB in atlas");
@@ -11,4 +11,4 @@ const connectToAtlaslDb = async () => {
     }
 };
 
-module.exports = connectToAtlaslDb;
+module.exports = connectToAtlasDb;

@@ -1,6 +1,6 @@
 const express = require("express");
 const chalk = require("chalk");
-
+require("dotenv").config();
 const connectToDb = require("./DB/dbService");
 const router = require("./router/router");
 const corsMiddleWares = require("./middlewares/cors");
@@ -12,9 +12,15 @@ const PORT = 8181;
 
 app.use(corsMiddleWares);
 app.use(express.json());
-app.use(express.static("./public"));
 
 app.use(loggerMiddleware());
+
+app.use(express.static("./public"));
+
+app.get("/", (req, res) => {
+    const myPassword = process.env.MY_PASSWORD;
+    res.send(myPassword);
+});
 
 app.use(router);
 
