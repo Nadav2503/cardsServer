@@ -20,13 +20,13 @@ router.post("/", auth, async (req, res) => {
     try {
         const userInfo = req.user;
         if (!userInfo.isBusiness) {
-            return handleError(res, 403, "Only business user can create new card")
+            return handleError(res, 403, "Only business user can create new card");
         }
         const errorMessage = validateCard(req.body);
         if (errorMessage !== "") {
             return handleError(res, 400, "Validation error: " + errorMessage);
         }
-        let card = await normalizeCard(req.body, userInfo._id)
+        let card = await normalizeCard(req.body, userInfo._id);
         card = await createCard(card);
         res.status(201).send(card);
     } catch (error) {
@@ -48,7 +48,6 @@ router.get("/my-cards", auth, async (req, res) => {
         const userInfo = req.user;
         if (!userInfo.isBusiness) {
             return handleError(res, 403, "Only business user can get my cards")
-
         }
         let cards = await getMyCards(userInfo._id);
         res.send(cards);
@@ -73,7 +72,7 @@ router.put("/:id", auth, async (req, res) => {
         const newCard = req.body;
         const userInfo = req.user;
         const fullCardFromDb = await getCard(id);
-        if (fullCardFromDb.user_id !== userInfo._id && !userInfo.isAdmin) {
+        if (userInfo._id !== fullCardFromDb.user_id.toString() && !userInfo.isAdmin) {
             return handleError(res, 403, "Only the user who created the business card or admin can update its details");
         }
         const errorMessage = validateCard(newCard);
@@ -93,7 +92,7 @@ router.delete("/:id", auth, async (req, res) => {
         const { id } = req.params;
         const userInfo = req.user;
         const fullCardFromDb = await getCard(id);
-        if (fullCardFromDb.user_id !== userInfo._id && !userInfo.isAdmin) {
+        if (userInfo._id !== fullCardFromDb.user_id.toString() && !userInfo.isAdmin) {
             return handleError(res, 403, "Only the user who created the business card or admin can delete this card");
         }
         let card = await deleteCard(id);

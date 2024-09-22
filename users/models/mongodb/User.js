@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
-    isBuisness: {
+    isBusiness: {
         type: Boolean,
         default: false,
     },

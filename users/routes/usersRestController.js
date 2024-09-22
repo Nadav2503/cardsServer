@@ -1,10 +1,11 @@
 const express = require("express");
-const { registerUser, getUser, getUsers, loginUser } = require("../models/usersAccessDataService");
+const { registerUser, getUser, getUsers, loginUser, updateUser } = require("../models/usersAccessDataService");
 const auth = require("../../auth/authService");
 const { handleError } = require("../../utils/handleErrors");
 const {
     validateRegistration,
     validateLogin,
+    validateEditUser,
 } = require("../validation/userValidationService");
 
 const router = express.Router();
@@ -16,7 +17,7 @@ router.post("/", async (req, res) => {
         let user = await registerUser(req.body);
         res.send(user);
     } catch (error) {
-        return handleError(res, 400, error.message)
+        return handleError(res, 400, error.message);
     }
 });
 
@@ -43,6 +44,28 @@ router.get("/:id", auth, async (req, res) => {
         res.send(user);
     } catch (error) {
         return handleError(res, 400, error.message)
+    }
+});
+
+router.put("/:id", auth, async (req, res) => {
+    try {
+        const { id } = req.params;
+        const updatedUserData = req.body;
+        const userInfo = req.user;
+
+        if (userInfo._id !== id && !userInfo.isAdmin) {
+            return handleError(res, 403, "You are not allowed to edit this user profile");
+        }
+
+        const errorMessage = validateEditUser(updatedUserData);
+        if (errorMessage) {
+            return handleError(res, 400, "Validation error: " + errorMessage);
+        }
+
+        let updatedUser = await updateUser(id, updatedUserData);
+        res.send(updatedUser);
+    } catch (error) {
+        handleError(res, error.status || 400, error.message);
     }
 });
 

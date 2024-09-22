@@ -1,7 +1,7 @@
 {
     "TOKEN_GENERATOR": "jwt",
     "LOGGER": "morgan",
-    "VALIDATOR": "joi",
+    "VALIDATOR": "Joi",
     "DB": "mongodb",
     "ENVIRONMENT": "production"
 }

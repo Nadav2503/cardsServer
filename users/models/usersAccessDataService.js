@@ -76,4 +76,18 @@ const loginUser = async (email, password) => {
     return createError("DB", error);
 };
 
-module.exports = { registerUser, getUsers, getUser, loginUser };
+const updateUser = async (userId, updatedData) => {
+    if (DB == "mongodb") {
+        try {
+            const user = await User.findByIdAndUpdate(userId, updatedData, { new: true });
+            return user;
+        } catch (error) {
+            return createError("Mongoose ", error);
+        }
+    }
+    const error = new Error("there is no other db for this requests");
+    error.status = 500;
+    return createError("DB", error);
+};
+
+module.exports = { registerUser, getUsers, getUser, loginUser, updateUser };
