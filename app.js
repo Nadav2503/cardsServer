@@ -8,7 +8,7 @@ const { handleError } = require("./utils/handleErrors");
 const loggerMiddleware = require("./logger/loggerService");
 
 const app = express();
-const PORT = 8181;
+const PORT = process.env.PORT || 8181;
 
 app.use(corsMiddleWares);
 app.use(express.json());
@@ -16,11 +16,6 @@ app.use(express.json());
 app.use(loggerMiddleware());
 
 app.use(express.static("./public"));
-
-app.get("/", (req, res) => {
-    const myPassword = process.env.MY_PASSWORD;
-    res.send(myPassword);
-});
 
 app.use(router);
 
