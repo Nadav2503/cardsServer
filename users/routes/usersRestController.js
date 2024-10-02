@@ -73,7 +73,7 @@ router.get("/", auth, async (req, res) => {
     try {
         const userInfo = req.user;
         if (!userInfo.isAdmin) {
-            return handleError(res, 403, "You are not allowed to access this user")
+            return handleError(res, 403, "You are not allowed to see all the users")
         }
         let users = await getUsers();
         res.send(users);
