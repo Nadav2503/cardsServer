@@ -92,7 +92,7 @@ const deleteCard = async (cardId) => {
 const changeBizNumber = async (cardId, newBizNumber) => {
     if (DB == "mongodb") {
         try {
-            let card = await Card.findAndUpdate({ _id: cardId }, { bizNumber: newBizNumber });
+            let card = await Card.findByIdAndUpdate({ _id: cardId }, { bizNumber: newBizNumber });
             return card;
         } catch (error) {
             return createError("Mongoose ", error);
