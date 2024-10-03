@@ -82,4 +82,18 @@ router.get("/", auth, async (req, res) => {
     }
 });
 
+router.delete("/:id", auth, async (req, res) => {
+    try {
+        const { id } = req.params;
+        const userInfo = req.user;
+        if (!userInfo.isAdmin) {
+            return handleError(res, 403, "Only admin can delete users");
+        }
+        let user = await deleteUser(id);
+        res.send(user);
+    } catch (error) {
+        handleError(res, error.status || 400, error.message);
+    }
+});
+
 module.exports = router;
