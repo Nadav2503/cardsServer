@@ -104,10 +104,12 @@ const deleteUser = async (userId) => {
     return createError("DB", error);
 };
 
-const changeIsBusiness = async (userId, newIsBusiness) => {
+const changeIsBusiness = async (userId) => {
     if (DB == "mongodb") {
         try {
-            let user = await User.findByIdAndUpdate({ _id: userId }, { isBusiness: newIsBusiness });
+            let user = await User.findById(userId);
+            user.isBusiness = !user.isBusiness;
+            await user.save();
             return user;
         } catch (error) {
             return createError("Mongoose ", error);
