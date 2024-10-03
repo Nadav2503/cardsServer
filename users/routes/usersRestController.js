@@ -7,6 +7,7 @@ const {
     validateLogin,
     validateEditUser,
 } = require("../validation/userValidationService");
+const { normalizeUser } = require("../helpers/normalizeUser");
 
 const router = express.Router();
 
@@ -14,7 +15,8 @@ router.post("/", async (req, res) => {
     try {
         const error = validateRegistration(req.body);
         if (error) return handleError(res, 400, `Joi Error: ${error}`);
-        let user = await registerUser(req.body);
+        const normalizedUser = normalizeUser(req.body);
+        let user = await registerUser(normalizedUser);
         res.send(user);
     } catch (error) {
         return handleError(res, 400, error.message);
