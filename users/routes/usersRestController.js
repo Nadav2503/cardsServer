@@ -1,5 +1,5 @@
 const express = require("express");
-const { registerUser, getUser, getUsers, loginUser, updateUser, deleteUser, changeIsBuisness } = require("../models/usersAccessDataService");
+const { registerUser, getUser, getUsers, loginUser, updateUser, deleteUser, changeIsBuisness, changeIsBusiness } = require("../models/usersAccessDataService");
 const auth = require("../../auth/authService");
 const { handleError } = require("../../utils/handleErrors");
 const {
@@ -104,7 +104,7 @@ router.patch("/isBusiness/:id", auth, async (req, res) => {
         if (!userInfo.isAdmin) {
             return handleError(res, 403, "Only admin can change isBusiness status");
         }
-        let user = await changeIsBuisness(id, isBuisness);
+        let user = await changeIsBusiness(id, isBuisness);
         res.send(user);
     } catch (error) {
         handleError(res, error.status || 400, error.message);
