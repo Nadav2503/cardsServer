@@ -99,12 +99,11 @@ router.delete("/:id", auth, async (req, res) => {
 router.patch("/isBusiness/:id", auth, async (req, res) => {
     try {
         const { id } = req.params;
-        const { isBusiness } = req.body;
         const userInfo = req.user;
         if (!userInfo.isAdmin) {
             return handleError(res, 403, "Only admin can change isBusiness status");
         }
-        let user = await changeIsBusiness(id, isBusiness);
+        let user = await changeIsBusiness(id);
         res.send(user);
     } catch (error) {
         handleError(res, error.status || 400, error.message);
