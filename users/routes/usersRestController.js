@@ -1,5 +1,5 @@
 const express = require("express");
-const { registerUser, getUser, getUsers, loginUser, updateUser } = require("../models/usersAccessDataService");
+const { registerUser, getUser, getUsers, loginUser, updateUser, deleteUser } = require("../models/usersAccessDataService");
 const auth = require("../../auth/authService");
 const { handleError } = require("../../utils/handleErrors");
 const {
