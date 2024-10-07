@@ -49,7 +49,10 @@ npm run or
 npm start
 הנקודה בפעולה הראשונה מוודאת שהכל מותקן בתיקייה הנכונה
 5)לחצו על הקישור שנוצר בטרמינל בעזרת ctrl + קליק שמאלי בעכבר
-
+6)כדי להתחיל את הפרויקט במצב לוקאלי
+npm run dev
+כדי להתחיל את הפרויקט במצב גלובלי
+npm start
 //--------------------------------------------------------------------
 
 כתובת הדוקומנטציה של השרת:
@@ -131,3 +134,63 @@ cards: https://documenter.getpostman.com/view/37787391/2sAXxJjbVP
 -- |- timeHelper.js
 
 |- app.js
+
+//--------------------------------------------------------------------
+
+הסבר על הקבצים
+
+תיקיית auth
+jwt.js - אחראי על יצירה ואימות של JWT לצורך אוטנטיקציה.
+authService.js - מנהל את הלוגיקה של האוטנטיקציה.
+
+תיקיית cards
+generateBizNumber.js - פונקציה ליצירת מספרי כרטיסי עסק רנדומלים.
+normalizeCard.js - נורמליזציה של נתוני כרטיסים כדי להבטיח פורמט אחיד.
+Card.js - מגדיר את הסכמה והמודל של הכרטיסים עבור MongoDB.
+cardsAccessDataService.js - מכיל פונקציות לגישה לנתוני כרטיסים במסד הנתונים.
+cardsRestController.js - מגדיר את המסלולים ולטפל בפניות API שקשורות לכרטיסים.
+validateCardWithJoi.js - משתמש ב-Joi כדי לאמת נתוני כרטיסים לפי כללים מוגדרים מראש.
+cardValidationService.js - מנהל את הלוגיקה לאימות כרטיסים.
+
+תיקיית config
+default.json - קונפיגורציה ברירת מחדל
+development.json - קונפיגורציה לסביבת פיתוח.
+production.json - קונפיגורציה לסביבת מוצר(העלאה לאוויר).
+
+תיקיית DB
+connectToAtlas.js - מתחבר למסד נתונים MongoDB Atlas עבור גישה בענן.
+connectToMongodbLocally.js - מתחבר מסד נתונים MongoDB מקומי.
+dbService.js - מכיל פונקציות חיבור למסד הנתונים
+
+תיקיית helper
+Address.js - מודל לטיפול בכתובות.
+Image.js - מודל לטיפול בתמונות.
+mongooseValidators.js - מאמתים מותאמים אישית עבור סכמות Mongoose.
+Name.js - מודל לטיפול בשמות.
+
+תיקיית logger
+morganLogger.js - פונקציה שמשלבת את Morgan לרישום בקשות לשרת עם מידע מפורט על הבקשות.
+loggerService,js - מספק שירותי רישום כלליים , כולל החזרת הלוגר.
+
+תיקיית middlewares
+cors.js - קונפיגורציה של CORS עבור האפליקציה.
+
+תיקיית router
+router.js - קובץ רוטציה מרכזי שמחבר בין מסלולים שונים(cards ו- users).
+
+תיקיית users
+bcrypt.js - פונקציה להצפנת סיסמאות באמצעות bcrypt.
+normalizeUser.js - נורמליזציה של נתוני משתמשים כדי להבטיח פורמט אחיד.
+User.js - מגדיר את הסכמה והמודל של המשתמשים עבור MongoDB.
+usersAcessDataService.js - מכיל פונקציות לגישה לנתוני משתמשים במסד הנתונים.
+usersRestController.js - מגדיר את המסלולים ולטפל בפניות API שקשורות למשתמשים.
+editUserValidation.js - מאמת נתונים כאשר עורכים משתמש.
+loginValidation.js - מאמת נתוני כאשר מנסים להתחבר.
+registerValidation.js - מאמת נתוני כאשר מנסים להירשם.
+userValidationService.js - מנהל את הלוגיקה לאימות משתמשים.
+
+תיקיית utils
+handleErrors.js - פונקציה לניהול שגיאות
+timeHelper.js - פונקציה לרישום נכון של זמנים
+
+app.js - הקובץ הראשי שכל המידלוורס נמצאים בו כולל פונקציה האזנה זמפעילה בעצם את הצד שרת
