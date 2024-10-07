@@ -67,9 +67,18 @@ cards: https://documenter.getpostman.com/view/37787391/2sAXxJjbVP
 
 |- cards
 -- |- helpers
+------ |- generateBizNumber.js
+------ |- jwt.js
 -- |- models
+------ |- jwt.js
+-------------|- AnchorComponent.jsx
+------ |- jwt.js
 -- |- routes
+------ |- jwt.js
 -- |- validation
+------ |- jwt.js
+-------------|- AnchorComponent.jsx
+------ |- jwt.js
 
 |- congfig
 -- |-components

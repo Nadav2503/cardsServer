@@ -12,17 +12,6 @@ const generateBizNumber = async () => {
         return createError("Mongoose", error)
     }
 
-    // while
-    // let random = _.random(1_000_000, 9_999_999);
-    // while (await isBizNumberExist(random)) {
-    //     random = _.random(1_000_000, 9_999_999);
-    // };
-
-    // recursive
-    // let random = _.random(1_000_000, 9_999_999);
-    // if (await isBizNumberExist(random)) return generateBizNumber() 
-
-    // do while
     let random;
     do {
         random = _.random(1_000_000, 9_999_999);
