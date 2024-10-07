@@ -81,86 +81,53 @@ cards: https://documenter.getpostman.com/view/37787391/2sAXxJjbVP
 ------ |- cardValidationService.js
 
 |- congfig
--- |-components
------- |- Form.jsx
------- |- FormButton.jsx
------- |- Input.jsx
--- |- hooks
------- |- useForm.js
--- |- utils
------- |- algoMethods.js
+-- |-default.json
+-- |-development.json
+-- |-production.json
 
 |- DB
--- |- useAxios.js
+-- |- mongodb
+------ |- connectToAtlas.js
+------ |- connectToMongodbLocally.js
+-- |- dbService.js
 
 |- helpers
--- |- footer
------- |- Footer.jsx
--- |-header
------- |- components
--------------|- AnchorComponent.jsx
------- |- hooks
--------------|- useAnchor.js
------- |- left-navigation
--------------|- LeftNavBar.jsx
------- |- logo
--------------|- Logo.jsx
--------------|- LogoIcon.jsx
------- |- middle-naviagtion
--------------|- SearchBar.jsx
------- |- right-navigation
--------------|- Logged.jsx
--------------|- NotLogged.jsx
--------------|- RightNavBar.jsx
------- |- Header.jsx
--- |- main
------- |- Main.jsx
--- |- Layout.jsx
+-- |- mongodb
+------ |- Address.js
+------ |- Image.js
+------ |- mongooseValidators.js
+------ |- Name.js
 
 |- logger
--- |- AboutPage.jsx
--- |- ErrorPage.jsx
+-- |- loggers
+------ |- morganLogger.js
+-- |- loggerService,js
 
 |- middlewares
--- |- CustomThemeProvider.jsx
--- |- SnackBarProvider.jsx
+-- |- cors.js
 
 |- router
--- |- components
------- |- NavBarItem.jsx
------- |- NavBarLink.jsx
--- |- Routes.jsx
--- |- routesModel.js
+-- |- router.js
 
 |- users
--- |- components
------- |- SignupForm.jsx
------- |- UserForm.jsx
 -- |- helpers
------- |- initialForms
--------------|- initialLoginForm.js
--------------|- initialSignupForm.js
--------------|- initialUserForm.js
------- |- normalization
--------------|- mapUserToModel.js
--------------|- mapUserToModelForUpdate.js
--------------|- normalizeUser.js
--------------|- normalizeUserForUpdate.js
--- |- hooks
------- |- useUsers.js
+------ |- bcrypt.js
+------ |- normalizeUser.js
 -- |- models
------- |- loginSchema.js
------- |- signupSchema.js
------- |- userSchema.js
--- |- pages
------- |- EditUserPage.jsx
------- |- LoginPage.jsx
------- |- SignupPage.jsx
------- |- UserProfilePage.jsx
--- |- providers
------- |- UserProvider.jsx
--- |- services
------- |- localStorageService.js
------- |- usersApiService.js
-|- utilse
+------ |- mongodb
+-------------|- User.js
+------ |- usersAcessDataService.js
+-- |- routes
+------ |- usersRestController.js
+-- |- validation
+------ |- joi
+-------------|- editUserValidation.js
+-------------|- loginValidation.js
+-------------|- registerValidation.js
+------ |- userValidationService.js
+
+|- utils
+-- |- handleErrors.js
+-- |- timeHelper.js
+
 |- app.js
