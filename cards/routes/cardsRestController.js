@@ -12,7 +12,7 @@ const {
 const auth = require("../../auth/authService");
 const { normalizeCard } = require("../helpers/normalizeCard");
 const { handleError } = require("../../utils/handleErrors");
-const validateCard = require("../validartion/cardValidationService");
+const validateCard = require("../validation/cardValidationService");
 
 const router = express.Router();
 
