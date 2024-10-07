@@ -68,17 +68,17 @@ cards: https://documenter.getpostman.com/view/37787391/2sAXxJjbVP
 |- cards
 -- |- helpers
 ------ |- generateBizNumber.js
------- |- jwt.js
+------ |- normalizeCard.js
 -- |- models
------- |- jwt.js
--------------|- AnchorComponent.jsx
------- |- jwt.js
+------ |- mongodb
+-------------|- Card.js
+------ |- cardsAccessDataService.js
 -- |- routes
------- |- jwt.js
+------ |- cardsRestController.js
 -- |- validation
------- |- jwt.js
--------------|- AnchorComponent.jsx
------- |- jwt.js
+------ |- joi
+-------------|- validateCardWithJoi.js
+------ |- cardValidationService.js
 
 |- congfig
 -- |-components
